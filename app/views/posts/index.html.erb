@@ -1,3 +1,10 @@
-<h1>Posts#index</h1>
-<div> form_with </div>
-<p>Find me in app/views/posts/index.html.erb</p>
+<h1>ようこそ</h1>
+<ul>
+ <% if user_signed_in? %>
+ <div><%= "こんにちは,#{current_user.nickname}さん" %></div>
+ <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+ <% else %>
+ <li><%= link_to "ユーザー新規登録", new_user_registration_path %></li>
+ <li><%= link_to "ログイン", new_user_session_path %></li>
+ <% end %>
+</ul>
