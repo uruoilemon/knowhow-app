@@ -51,7 +51,6 @@ RSpec.describe User, type: :model do
     it 'passwordが半角数字のみの場合は登録できない' do
       @user.password = '123456'
       @user.password_confirmation = '123456'
-      binding.pry
       @user.valid?
       expect(@user.errors.full_messages).to include('Password には英字と数字の両方を含めて設定してください')
     end
