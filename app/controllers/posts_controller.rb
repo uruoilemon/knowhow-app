@@ -17,6 +17,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def search
+    @posts = Post.search(params[:keyword])
+  end
+
   def post_params
     params.require(:post).permit(:title, :text, :answer, :image).merge(user_id: current_user.id)
   end
