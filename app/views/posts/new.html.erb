@@ -1,0 +1,28 @@
+<h1> あなたの知恵を貸してください。>_< </h1>
+
+<%= form_with model: @post, local: true do |f|%>
+<%= render 'shared/error_messages', model: f.object %>
+  <div class="field">
+    <%= f.label :title, "投稿タイトル" %><br />
+    <%= f.text_field :title,class: :form__title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :text, "投稿内容" %><br />
+    <%= f.text_area :text, class: :form__text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :answer, "解決策" %><br />
+    <%= f.text_area :answer, class: :form__text %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image, "参考画像" %><br />
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "投稿する", class: :form__btn  %>
+  </div>
+<% end %>
