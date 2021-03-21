@@ -21,8 +21,8 @@
 | Column    | Type       | Options                        |
 | ------    | ---------- | ------------------------------ |
 | text      | text       | null: false                    |
-| user      | references | null: false, foreign_key: true |
-| post      | references | null: false, foreign_key: true |
+| user_id   | references | null: false, foreign_key: true |
+| post_id   | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -36,9 +36,33 @@
 | title       | string     | null: false                    |
 | text        | text       | null: false                    |
 | answer      | text       |                                |
-| user        | references | null: false, foreign_key: true |
+| user_id     | references | null: false, foreign_key: true |
 
 
 ### Association
 - belongs_to :user
 - has_many :comments
+- has_many :post_tag_relations
+
+
+## tagsテーブル
+
+| Column                | Type       | Options                        |
+| --------------------- | ---------- | ------------------------------ |
+| name                  | string     | null: false, uniqueness: true  |
+| post_tag__relation_id | references | null: false, foreign_key: true |
+
+### Association
+- has_many :post_tag_relations
+
+
+## post_tag_relationsテーブル
+
+| Column      | Type       | Options                        |
+| ----------- | ---------- | ------------------------------ |
+| post_id     | references | null: false, foreign_key: true |
+| tag_id      | references | null: false, foreign_key: true |
+
+### Association
+- belongs_to :post
+- belongs_to :tag
