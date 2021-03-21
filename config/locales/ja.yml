@@ -1,0 +1,15 @@
+ja:
+ activerecord:
+   attributes:
+     user:
+       nickname: ニックネーム
+       department: 所属部署名
+       name: 名前
+ activemodel:
+  attributes:
+   posts_tag:
+       title: 投稿タイトル
+       text: 投稿内容
+       image: 画像
+       name: タグ名
+       
