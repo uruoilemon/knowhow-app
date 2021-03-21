@@ -1,6 +1,6 @@
 <h1> あなたの知恵を貸してください。>_< </h1>
 
-<%= form_with model: @post, local: true do |f|%>
+<%= form_with model: @post, url: posts_path, local: true do |f|%>
 <%= render 'shared/error_messages', model: f.object %>
   <div class="field">
     <%= f.label :title, "投稿タイトル" %><br />
@@ -16,6 +16,14 @@
     <%= f.label :answer, "解決策" %><br />
     <%= f.text_area :answer, class: :form__text %>
   </div>
+
+  <div class="tag-field", id='tag-field'>
+      <%= f.label :name, "タグ" %><br />
+      <%= f.text_field :name, class:"input-tag" %>
+  </div>
+
+    <div id="search-result">
+    </div>
 
   <div class="field">
     <%= f.label :image, "参考画像" %><br />
