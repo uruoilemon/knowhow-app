@@ -9,7 +9,6 @@ class PostsController < ApplicationController
   end
   
   def create
-    binding.pry
     @post = PostsTag.new(post_params)
     if @post.valid?
        @post.save
