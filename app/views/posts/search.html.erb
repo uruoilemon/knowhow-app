@@ -5,6 +5,6 @@
 <% end %>
 <div class="contents row">
   <% @posts.each do |post| %>
-    <%= link_to "#{post.title}" %> <br> <%# 詳細ページへのリンクを貼る %>
+    <%= link_to "#{post.title}",post_path(post) %> <br>
   <% end %>
 </div>

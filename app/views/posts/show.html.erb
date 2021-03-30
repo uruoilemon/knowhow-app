@@ -1,0 +1,24 @@
+<%= link_to "一覧ページへ戻る", root_path %>
+
+      <% if user_signed_in? && current_user.id == @post.user_id %>
+        <div class="prototype__manage">
+          <%= link_to "編集する", edit_post_path(@post.id), class: :post__btn %>
+          <%= link_to "削除する", post_path(@post.id), method: :delete, class: :post__btn %>
+        </div>
+      <% end %>
+
+    <h2 class="name">
+      <%= "タイトル[#{@post.title}]" %>
+    </h2>
+    <div class="item-price-box">
+      <span class="item-price">
+         <%= "本文#{@post.text}" %>
+      </span>
+      <span class="item-postage">
+        <%= "回答#{@post.answer}" %>
+      </span>
+    </div>
+    <div class='item-img-content'>
+    <%# <%= image_tag post.image.variant(resize: '100x100')if post.image.attached?  %>
+      <%= image_tag @post.image.variant(resize: '100x100') if @post.image.attached?  %>
+    </div>
