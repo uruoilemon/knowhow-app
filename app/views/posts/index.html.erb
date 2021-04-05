@@ -13,10 +13,14 @@
 
 
 <p>投稿された内容一覧</p>
+<%="---------------------------------------------------------------------------------------------"%>
 <div class="main">
 <% @posts.each do |post| %>
- <%= "・タイトル：#{post.title} 投稿日:#{post.created_at.strftime('%Y/%m/%d')}" %><br>
- <%= image_tag post.image.variant(resize: '100x100') if post.image.attached? %><br>
+ <%= link_to post_path(post.id) do%>
+ <div class="title">
+ <%= "タイトル:「#{post.title}」"%> 
+ </div>
+ <p class="time"> <%="投稿日:#{post.created_at.strftime('%Y/%m/%d')}"%></p>
         <ul class="tag">
           <li class="tag-list">
             <%post.tags.each do |tag| %>
@@ -25,7 +29,9 @@
           </li>
         </ul>
     <% end %>
- </div>
+  <%="---------------------------------------------------------------------------------------------"%>
+  <% end %>
+</div>
 </body>
 
 <footer>
