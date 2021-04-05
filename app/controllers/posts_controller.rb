@@ -5,18 +5,44 @@ class PostsController < ApplicationController
   end
   
   def new
-    @post = PostsTag.new
+    @posts_tag = PostsTag.new
   end
   
   def create
-    @post = PostsTag.new(post_params)
-    if @post.valid?
-       @post.save
-       redirect_to root_path
+    @posts_tag = PostsTag.new(post_params)
+    if @posts_tag.save
+       redirect_to posts_path, notice: 'The post has been created.'
     else
       render :new
     end
   end
+
+  def show
+    @post = Post.find(params[:id])
+    @tag = @post.tags
+  end
+  
+  def edit
+    @post = current_user.posts.find(params[:id])
+    @posts_tag = PostsTag.new(post: @post)
+  end
+
+  def update
+    load_post
+    @posts_tag = PostsTag.new(post_params, post: @post)
+    if @posts_tag.save
+       redirect_to @post, notice: 'The post has been updated.'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    posts_tag = PostsTag.find(params[:id])
+    posts_tag.destroy
+    redirect_to root_path
+  end
+
 
   def tag_search
     return nil if params[:keyword] == ""
@@ -27,7 +53,12 @@ class PostsController < ApplicationController
     @posts = Post.search(params[:keyword])
   end
 
+private
   def post_params
-    params.require(:posts_tag).permit(:title, :text, :answer, :image, :name).merge(user_id: current_user.id)
+    params.require(:post).permit(:title, :text, :answer, :image, :tag_names).merge(user_id: current_user.id)
+  end
+ 
+  def load_post
+    @post = current_user.posts.find(params[:id])
   end
 end
