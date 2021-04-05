@@ -1,24 +1,65 @@
-<%= link_to "一覧ページへ戻る", root_path %>
+<header>
+<%= render partial: "header"%>
+</header>
+<main class="main">
+  <div class="inner">
+    <div class="post__wrapper">
+      <p class="post__hedding">
+      <%= @post.title %>
+    </p>
+        <p class="tag__names">
+        <% if @post.tags.present? %>
+        <%@post.tags.each do |tag| %>
+          #<%=tag.name%>
+        <%end%>
+        <%else%>
+        <%= "#タグはついてません" %>
+        <%end%>
+      </p>
 
       <% if user_signed_in? && current_user.id == @post.user_id %>
-        <div class="prototype__manage">
+        <div class="post__manage">
           <%= link_to "編集する", edit_post_path(@post.id), class: :post__btn %>
           <%= link_to "削除する", post_path(@post.id), method: :delete, class: :post__btn %>
         </div>
       <% end %>
 
-    <h2 class="name">
-      <%= "タイトル[#{@post.title}]" %>
-    </h2>
-    <div class="item-price-box">
-      <span class="item-price">
-         <%= "本文#{@post.text}" %>
-      </span>
-      <span class="item-postage">
-        <%= "回答#{@post.answer}" %>
-      </span>
+    <% if @post.answer.present? %>
+    <div class="post__body">
+      <div class="post__detail">
+       <p class="detail__title">投稿内容</p>
+       <p class="detail__message">
+         <%= @post.text %>
+       </p>
+      </div>
+        <div class="post__detail">
+          <p class="detail__title">解決策</p>
+          <p class="detail__message">
+           <%= @post.answer %>
+          </p>
+        </div>
+        <%else%>
+      <div class="post__body">
+        <div class="post__detail">
+         <p class="detail__title">疑問点</p>
+         <p class="detail__message">
+          <%= @post.text %>
+        </p>
+      </div>
+          <div class="post__detail">
+          <p class="detail__title">回答募集中</p>
+          <p class="detail__message">
+           <%= "どうぞコメント欄に書き込んでください。" %>
+          </p>
+        </div>
+        <%end%>
+
     </div>
-    <div class='item-img-content'>
-    <%# <%= image_tag post.image.variant(resize: '100x100')if post.image.attached?  %>
-      <%= image_tag @post.image.variant(resize: '100x100') if @post.image.attached?  %>
+
+    <div class='post__image'>
+      <%= image_tag @post.image if @post.image.attached?  %>
     </div>
+
+    </div>
+  </div>
+</main>

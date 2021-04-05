@@ -1,7 +1,10 @@
 
-<ul>
+  <div>
+  <%= link_to "一覧ページへ戻る", root_path, class: :to_index %>
+  </div>
  <% if user_signed_in? %>
- <div><%= "こんにちは!#{current_user.nickname}さん" %></div>
+  <div class="greeting">  <%= "こんにちは! #{current_user.nickname}さん" %></div>
+  <ul>
  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
  <% else %>
  <li><%= link_to "ユーザー新規登録", new_user_registration_path %></li>
